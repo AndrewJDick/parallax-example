@@ -1,32 +1,33 @@
 .c-parallax {
   height: 100vh;
-  overflow: hidden;
+  position: relative;
 
   &__quadrant {
     height: 50vh;
     overflow: scroll;
-  }
-
-  &__container {
-    height: 50vh;
-    width: 100%;
+    z-index: 10;
   }
 }
 
-.c-parallax__profile {
-  color: $brand-primary-1;
-  background-color: $brand-primary-4;
-
-  &__title,
-  &__blurb {
-    text-align: center;
-  }
+.panel {
+  position: relative;
+  min-height: 50vh;
+  z-index: 5;
 }
 
-.c-parallax__image {
-  background-color: $brand-primary-3;
+.panel-fixed {
+  z-index: 1;
 }
 
+.panel-inner {
+  padding: 1rem;
+  width: 100%;
+}
 
-
-
+/* Inner content remains fixed, which should give the illusion of overlapping content */
+.panel-fixed .panel-inner {
+  position: fixed;
+  top: 0;
+  left: 50vw;
+  z-index: 2;
+}
