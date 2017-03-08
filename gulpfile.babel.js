@@ -1,16 +1,16 @@
-const gulp 			= require('gulp'),
-	sass 			= require('gulp-sass'),
-	cleanCss 		= require('gulp-clean-css'),
-	newer 			= require('gulp-newer'),
-	concat 			= require('gulp-concat'),
-	htmlmin 		= require('gulp-htmlmin'),
-	uglify 			= require('gulp-uglify'),
-	autoprefixer 	= require('gulp-autoprefixer'),
-	plumber 		= require('gulp-plumber'),
-	imagemin 		= require('gulp-imagemin'),
-	rename 			= require('gulp-rename'),
-	connectMulti 	= require('gulp-connect-multi'),
-	connect 		= connectMulti();
+const  gulp 			   = require('gulp'),
+	     sass 			   = require('gulp-sass'),
+	     cleanCss 	   = require('gulp-clean-css'),
+	     newer 			   = require('gulp-newer'),
+	     concat 		   = require('gulp-concat'),
+	     htmlmin 		   = require('gulp-htmlmin'),
+	     uglify 		   = require('gulp-uglify'),
+	     autoprefixer  = require('gulp-autoprefixer'),
+	     plumber 		   = require('gulp-plumber'),
+	     imagemin 		 = require('gulp-imagemin'),
+	     rename 			 = require('gulp-rename'),
+	     connectMulti  = require('gulp-connect-multi'),
+	     connect 		   = connectMulti();
 
 
 // HTML
@@ -60,7 +60,7 @@ gulp.task('styles:font', () => {
 gulp.task('styles', ['styles:css', 'styles:font']);
 
 gulp.task('styles:reload', ['styles'], () => {
-    return gulp.src(['./src/scss/main.scss', './src/fonts/*'])
+    return gulp.src(['./src/scss/**/*.scss', './src/fonts/*'])
     	.pipe(connect.reload());
 });
 
@@ -110,7 +110,7 @@ gulp.task('connect', connect.server(connectOptions('Google Chrome', 8000, 35729)
 // Watch Tasks
 gulp.task('watch', () => {
 	gulp.watch('./src/*.html', ['html:reload']);
-	gulp.watch('./src/scss/*.scss', ['styles:reload']);
+	gulp.watch('./src/scss/**/*.scss', ['styles:reload']);
 	gulp.watch('./src/js/**/*.js', ['scripts:reload']);
 	gulp.watch('./src/img/*', ['media::reload']);
 });

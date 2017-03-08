@@ -1,0 +1,14 @@
+.c-parallax {
+  height: 100vh;
+
+  &__content {
+    background-color: $brand-primary-4;
+    height: 50vh;
+  }
+
+  &__image {
+    background-color: $brand-primary-3;
+    height: 50vh;
+  }
+
+}
