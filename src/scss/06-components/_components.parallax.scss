@@ -1,14 +1,32 @@
 .c-parallax {
   height: 100vh;
+  overflow: hidden;
 
-  &__content {
-    background-color: $brand-primary-4;
+  &__quadrant {
     height: 50vh;
+    overflow: scroll;
   }
 
-  &__image {
-    background-color: $brand-primary-3;
+  &__container {
     height: 50vh;
+    width: 100%;
   }
-
 }
+
+.c-parallax__profile {
+  color: $brand-primary-1;
+  background-color: $brand-primary-4;
+
+  &__title,
+  &__blurb {
+    text-align: center;
+  }
+}
+
+.c-parallax__image {
+  background-color: $brand-primary-3;
+}
+
+
+
+
