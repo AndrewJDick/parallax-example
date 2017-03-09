@@ -13,7 +13,7 @@ export default class Parallax {
       body: document.querySelectorAll('body')[0],
       parallax: document.querySelectorAll('#parallax')[0],
       fixed: 'u-fixed',
-      active: false
+      active: false,
     }
 
     this.activate();
@@ -34,10 +34,10 @@ export default class Parallax {
     for (let row = 0; row < parallaxRows.length; row++) {
       
       // For each row, find the panel quadrant and retrieve it's rendered height;
-      const panelQuadrant = parallaxRows[row].getElementsByClassName('js-panel-quadrant')[0];
-      const imageQuadrant = parallaxRows[row].getElementsByClassName('c-parallax__panelQuadrant')[0];
+      const panel = parallaxRows[row].getElementsByClassName('js-panel-quadrant')[0];
+      const panelQuadrant = parallaxRows[row].getElementsByClassName('c-parallax__panelQuadrant')[0];
 
-      const $rowHeight = $(panelQuadrant).height();
+      const $rowHeight = $(panel).height();
 
       // Assign the height amongst each of the row's images
       const rowImages = parallaxRows[row].getElementsByClassName('c-parallax__imgQuadrant__img');
@@ -51,31 +51,29 @@ export default class Parallax {
       var ticking = false;
       var self = this;
 
-      imageQuadrant.addEventListener('scroll', function(e) {
-        last_known_scroll_position = imageQuadrant.scrollTop;
-        
+      panelQuadrant.addEventListener('scroll', (e) => { 
+
         if (!ticking) {
-          window.requestAnimationFrame(function() {
-            self.overlapImages(last_known_scroll_position, rowImages);
+          last_known_scroll_position = window.scrollY;
+
+          window.requestAnimationFrame(() => {       
+            self.overlapImages(panelQuadrant.scrollTop, rowImages, imgHeight);
             ticking = false;
           });
         }
+
         ticking = true;
+
       });
     }
   }
 
-  overlapImages(scrollPosition, rowImages) {
-    
+  overlapImages(scrollPosition, rowImages, imgHeight) {
 
     // Reduce the height of the images on scroll, starting with the lowest
-    let value = parseInt(rowImages[rowImages.length-1].style.height) - 1.5;
-    console.log(value);
+    let value = imgHeight - scrollPosition;
 
     rowImages[rowImages.length-1].style.height = `${value}px`; 
-
-
-
 
   }
 }
