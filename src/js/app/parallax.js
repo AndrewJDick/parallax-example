@@ -27,24 +27,26 @@ export default class Parallax {
     this.elements.html.style.overflowY = 'hidden';
 
     // Group all parallax rows in an array 
-    // const parallaxRows = document.getElementsByClassName("c-parallax__row");
+    const parallaxRows = this.elements.parallax.getElementsByClassName('c-parallax__row');
+    console.log(parallaxRows);
 
-    // for (let row = 0; row < parallaxRows.length; row++) {
+    for (let row = 0; row < parallaxRows.length; row++) {
       
-    //   const rowHeight = $(parallaxRows[row]).height();
+      // For each row, find the panel quadrant and retrieve it's rendered height;
+      const panelQuadrant = parallaxRows[row].getElementsByClassName('js-panel-quadrant');
+      const $rowHeight = $(panelQuadrant).height();
 
-    //   const panelImages = parallaxRows[row].getElementsByClassName("c-parallax__img");
+      // Assign the height amongst each of the row's images
+      const rowImages = parallaxRows[row].getElementsByClassName('c-parallax__imgQuadrant__img');
+      const imgHeight = $rowHeight / rowImages.length;
 
-    //   console.log(panelImages);
+      for (let img = 0; img < rowImages.length; img++) {
+        rowImages[img].style.height = `${imgHeight}px`;
+      }
+    }
 
-    //   // for (let img = 0; img < panelImages.length; row++) {
-        
-    //   //   console.log(rowHeight);
-    //   //   // const imgHeight = rowHeight / panelImages.length;
-    //   //   // panelImages[img].style.height = imgHeight;
-    //   // }
-    // }
   }
+
   // listeners() {
 
   //   window.onscroll = () => {
