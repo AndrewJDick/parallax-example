@@ -1,13 +1,27 @@
 .c-parallax {
   height: 100vh;
+  width: 100%;
+  overflow: hidden;
 
   &__quadrant {
-    height: 50vh;
-    overflow: hidden;
+    height: 100vh;
+    position: relative;
+    overflow-y: scroll;
+  }
+
+  &__row {
+    min-height: 100vh;
+  }
+
+  &__panel {
+    min-height: 100vh;
+  }
+
+  &__img {
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 }
-
-.panel {
-  height: 50vh;
-}
-

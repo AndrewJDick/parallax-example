@@ -11,71 +11,52 @@ export default class Parallax {
     this.elements = {
       html: document.querySelectorAll('html')[0],
       body: document.querySelectorAll('body')[0],
-      window: window,
       parallax: document.querySelectorAll('#parallax')[0],
-      fixed: 'u-fixedPos'
+      parallaxRow: document.querySelectorAll('.parallax__row')[0],
+      fixed: 'u-fixed',
+      active: false
     }
 
-    this.listeners();
+    this.activate();
   }
 
-  listeners() {
+  activate() {
+    
+    this.active = true;
+    this.elements.parallax.classList.add(this.elements.fixed);
+    this.elements.html.style.overflowY = 'hidden';
 
-    window.onscroll = () => {
+    // Group all parallax rows in an array 
+    // const parallaxRows = document.getElementsByClassName("c-parallax__row");
 
-      let paraRect = this.elements.parallax.getBoundingClientRect();
+    // for (let row = 0; row < parallaxRows.length; row++) {
+      
+    //   const rowHeight = $(parallaxRows[row]).height();
 
-      if (paraRect.top === 0) {
-        this.fixElement(this.elements.parallax);
-        this.scrollLock(this.elements.html, true);
-      }
+    //   const panelImages = parallaxRows[row].getElementsByClassName("c-parallax__img");
 
-    }
+    //   console.log(panelImages);
+
+    //   // for (let img = 0; img < panelImages.length; row++) {
+        
+    //   //   console.log(rowHeight);
+    //   //   // const imgHeight = rowHeight / panelImages.length;
+    //   //   // panelImages[img].style.height = imgHeight;
+    //   // }
+    // }
   }
+  // listeners() {
 
-  fixElement(elem) {
-    if (!elem.classList.contains(this.elements.fixed)) {
-      elem.classList.add(this.elements.fixed)
-    }
-  }
+  //   window.onscroll = () => {
 
-  scrollLock(elem, lock) {
+  //     let parallaxRect = this.elements.parallax.getBoundingClientRect();
 
-    if(lock) {
-      elem.style.overflowY = `hidden`;
-    }
-  }
+  //     parallaxRect.top <= 0
+  //       ? this.active() 
+  //       : this.disable();
+
+  //   }
+  // }
 
 }
-
-//       let bodyRect = document.querySelectorAll('body')[0].getBoundingClientRect();
-
-// }
-  //   open() {
-  //   this.active = true;
-  //   this.elements.container.style.left = `${0}%`;
-  //   this.elements.navigation.style.overflowY = `scroll`;
-  //   this.elements.navigation.style.height = `100vh`;
-  //   this.elements.html.style.overflowY = `hidden`;
-  //   this.elements.body.style.overflowY = `hidden`;
-  //   this.elements.container.classList.add(this.class);
-  //   this.elements.hamburger.classList.add(this.class);
-  // }
-
-  // close() {
-  //   this.active = false;
-  //   this.elements.container.classList.remove(this.class);
-  //   this.elements.hamburger.classList.remove(this.class);
-  //   this.elements.navigation.style.overflowY = `inherit`;
-  //   this.elements.navigation.style.height = `inherit`;
-
-  //   setTimeout(() => {
-  //     if(!this.active) {
-  //       this.elements.container.style.left = `${100}%`;
-  //       this.elements.html.style.overflowY = `auto`;
-  //       this.elements.body.style.overflowY = `auto`;
-  //     }
-  //   }, this.speed);
-  // }
-
   
