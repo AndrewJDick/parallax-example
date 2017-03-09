@@ -12,7 +12,6 @@ export default class Parallax {
       html: document.querySelectorAll('html')[0],
       body: document.querySelectorAll('body')[0],
       parallax: document.querySelectorAll('#parallax')[0],
-      parallaxRow: document.querySelectorAll('.parallax__row')[0],
       fixed: 'u-fixed',
       active: false
     }
@@ -26,14 +25,18 @@ export default class Parallax {
     this.elements.parallax.classList.add(this.elements.fixed);
     this.elements.html.style.overflowY = 'hidden';
 
-    // Group all parallax rows in an array 
+    this.setImgHeights();
+  }
+
+  setImgHeights() {
     const parallaxRows = this.elements.parallax.getElementsByClassName('c-parallax__row');
-    console.log(parallaxRows);
 
     for (let row = 0; row < parallaxRows.length; row++) {
       
       // For each row, find the panel quadrant and retrieve it's rendered height;
-      const panelQuadrant = parallaxRows[row].getElementsByClassName('js-panel-quadrant');
+      const panelQuadrant = parallaxRows[row].getElementsByClassName('js-panel-quadrant')[0];
+      const imageQuadrant = parallaxRows[row].getElementsByClassName('c-parallax__panelQuadrant')[0];
+
       const $rowHeight = $(panelQuadrant).height();
 
       // Assign the height amongst each of the row's images
@@ -43,22 +46,37 @@ export default class Parallax {
       for (let img = 0; img < rowImages.length; img++) {
         rowImages[img].style.height = `${imgHeight}px`;
       }
-    }
 
+      var last_known_scroll_position = 0;
+      var ticking = false;
+      var self = this;
+
+      imageQuadrant.addEventListener('scroll', function(e) {
+        last_known_scroll_position = imageQuadrant.scrollTop;
+        
+        if (!ticking) {
+          window.requestAnimationFrame(function() {
+            self.overlapImages(last_known_scroll_position, rowImages);
+            ticking = false;
+          });
+        }
+        ticking = true;
+      });
+    }
   }
 
-  // listeners() {
+  overlapImages(scrollPosition, rowImages) {
+    
 
-  //   window.onscroll = () => {
+    // Reduce the height of the images on scroll, starting with the lowest
+    let value = parseInt(rowImages[rowImages.length-1].style.height) - 1.5;
+    console.log(value);
 
-  //     let parallaxRect = this.elements.parallax.getBoundingClientRect();
+    rowImages[rowImages.length-1].style.height = `${value}px`; 
 
-  //     parallaxRect.top <= 0
-  //       ? this.active() 
-  //       : this.disable();
 
-  //   }
-  // }
 
+
+  }
 }
   

@@ -4,15 +4,15 @@
   overflow: hidden;
 
   &__row {
-    height: 100vh;
+    height: 50vh;
   }
 
   &__panelQuadrant {
-    height: 100vh;
+    height: 50vh;
     overflow-y: scroll;
 
     &__panel {
-      height: 100vh;
+      height: 50vh;
     }
   }
 
