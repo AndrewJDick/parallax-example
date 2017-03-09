@@ -77,7 +77,7 @@ gulp.task('scripts:vendor', () => {
 
 gulp.task('scripts:main', () => {
 	return gulp.src('./src/js/app.js')
-		//.pipe(plumber())
+		.pipe(plumber())
     .pipe(browserify({
       insertGlobals : true 
     }))

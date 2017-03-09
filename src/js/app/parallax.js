@@ -10,21 +10,45 @@ export default class Parallax {
   constructor() {
     this.elements = {
       html: document.querySelectorAll('html')[0],
-      body: document.querySelectorAll('body')[0]
+      body: document.querySelectorAll('body')[0],
+      window: window,
+      parallax: document.querySelectorAll('#parallax')[0],
+      fixed: 'u-fixedPos'
     }
 
     this.listeners();
   }
 
   listeners() {
-    this.elements.html.addEventListener('click', () => {
-      console.log('foo');
-    });
+
+    window.onscroll = () => {
+
+      let paraRect = this.elements.parallax.getBoundingClientRect();
+
+      if (paraRect.top === 0) {
+        this.fixElement(this.elements.parallax);
+        this.scrollLock(this.elements.html, true);
+      }
+
+    }
+  }
+
+  fixElement(elem) {
+    if (!elem.classList.contains(this.elements.fixed)) {
+      elem.classList.add(this.elements.fixed)
+    }
+  }
+
+  scrollLock(elem, lock) {
+
+    if(lock) {
+      elem.style.overflowY = `hidden`;
+    }
   }
 
 }
 
-//
+//       let bodyRect = document.querySelectorAll('body')[0].getBoundingClientRect();
 
 // }
   //   open() {

@@ -3,31 +3,11 @@
 
   &__quadrant {
     height: 50vh;
-    position: relative;
     overflow: hidden;
   }
 }
 
 .panel {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.p1 {
- height: 465px;
-}
-
-.p2 {
-  height: 465px;
-}
-
-.p3 {
- height: 465px;
-}
-
-.p4 {
- height: 465px;
+  height: 50vh;
 }
 
