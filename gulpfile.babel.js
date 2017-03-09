@@ -1,4 +1,5 @@
 const  gulp 			   = require('gulp'),
+       browserify    = require('gulp-browserify'),
 	     sass 			   = require('gulp-sass'),
 	     cleanCss 	   = require('gulp-clean-css'),
 	     newer 			   = require('gulp-newer'),
@@ -75,9 +76,12 @@ gulp.task('scripts:vendor', () => {
 });
 
 gulp.task('scripts:main', () => {
-	return gulp.src('./src/js/*.js')
-		.pipe(plumber())
-		.pipe(uglify())
+	return gulp.src('./src/js/app.js')
+		//.pipe(plumber())
+    .pipe(browserify({
+      insertGlobals : true 
+    }))
+		//.pipe(uglify())
 		.pipe(gulp.dest('./dist/js'));
 });;
 

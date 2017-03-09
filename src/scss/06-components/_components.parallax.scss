@@ -1,33 +1,33 @@
 .c-parallax {
   height: 100vh;
-  position: relative;
 
   &__quadrant {
     height: 50vh;
-    overflow: scroll;
-    z-index: 10;
+    position: relative;
+    overflow: hidden;
   }
 }
 
 .panel {
-  position: relative;
-  min-height: 50vh;
-  z-index: 5;
-}
-
-.panel-fixed {
-  z-index: 1;
-}
-
-.panel-inner {
-  padding: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
 }
 
-/* Inner content remains fixed, which should give the illusion of overlapping content */
-.panel-fixed .panel-inner {
-  position: fixed;
-  top: 0;
-  left: 50vw;
-  z-index: 2;
+.p1 {
+ height: 465px;
 }
+
+.p2 {
+  height: 465px;
+}
+
+.p3 {
+ height: 465px;
+}
+
+.p4 {
+ height: 465px;
+}
+
