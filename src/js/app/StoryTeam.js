@@ -12,10 +12,9 @@ export default class StoryTeam {
       panels: document.querySelectorAll('.c-team__panel'),
       rows: document.querySelectorAll('.c-team__row'),
       row:  'c-team__row',
-      row1: 'c-team__row--1',
-      row2: 'c-team__row--2',
-      row3: 'c-team__row--3',
-      row4: 'c-team__row--4'
+      upper: 'c-team__row--upper',
+      lower: 'c-team__row--lower',
+      relative: 'c-team__row--relative'
     }
 
     this.listeners();
@@ -56,18 +55,13 @@ export default class StoryTeam {
       const rowTop = row.getBoundingClientRect().top;
 
       if ( -rowHeight < rowTop && rowTop < 0 ) {
-        
-        // Remove any previous row-based classes
-        for (let p = 0; p < this.team.rows.length; p++) {
-          this.team.rows[p].setAttribute('class', this.team.row);
-        }
 
-        // Generate new quadrant
-        row.nextSibling.classList.add(this.team.row2);
-        row.classList.add(this.team.row1);
-        this.team.container.getElementsByClassName(this.team.row2)[0].nextSibling.classList.add(this.team.row3);
-        this.team.container.getElementsByClassName(this.team.row3)[0].nextSibling.classList.add(this.team.row4);
+        row.classList.add(this.team.upper);
+        row.nextSibling.classList.add(this.team.lower);
         
+        row.classList.remove(this.team.relative);
+        row.nextSibling.classList.remove(this.team.relative);
+
       }
     }
   }
