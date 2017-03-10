@@ -1,10 +1,3 @@
-// 1. Fix the parallax container when it reaches the top of the page
-
-// 2a. Calculate the height of each row in the parallax container
-// 2b. As the user scrolls, subtract pixels from the height of the div
-
-// 3. Once all content has been shown, return the parallax container to static positioning 
-
 export default class StoryTeam {
   
   constructor() {
@@ -15,10 +8,14 @@ export default class StoryTeam {
     }
 
     this.team = {
-      container: document.querySelectorAll('#team-story')[0],
+      container: document.querySelectorAll('#story-team')[0],
       panels: document.querySelectorAll('.c-team__panel'),
-      row1: 'c-team__row--first',
-      row2: 'c-team__row--second'
+      rows: document.querySelectorAll('.c-team__row'),
+      row:  'c-team__row',
+      row1: 'c-team__row--1',
+      row2: 'c-team__row--2',
+      row3: 'c-team__row--3',
+      row4: 'c-team__row--4'
     }
 
     this.listeners();
@@ -26,6 +23,8 @@ export default class StoryTeam {
 
 
   listeners() {
+
+    //window.alert('hi');
 
     this.elements.window.addEventListener('scroll', (e) => { 
 
@@ -37,7 +36,7 @@ export default class StoryTeam {
         last_known_scroll_position = this.elements.window.scrollY;
 
         this.elements.window.requestAnimationFrame(() => { 
-          that.fixTopPanels();
+          that.fixedTopRows();
           ticking = false;
         })
       }
@@ -47,48 +46,30 @@ export default class StoryTeam {
   }
 
 
-  fixTopPanels() {
+  fixedTopRows() {
+
+    const rowHeight = this.team.container.offsetHeight / this.team.rows.length; 
     
-    for (let panel = 0; panel < this.team.panels.length; panel++) {
+    for (let r = 0; r < this.team.rows.length; r++) {
 
-      const panel = this.team.panels[panel];
-      const panelTop = panel.getBoundingClientRect().top;
+      const row = this.team.rows[r];
+      const rowTop = row.getBoundingClientRect().top;
 
-      if (panelTop <= 0 && !panelTop.classList.contains(this.team.row1)) {
-        panel.parentNode.classList.add(this.team.row1);
+      if ( -rowHeight < rowTop && rowTop < 0 ) {
+        
+        // Remove any previous row-based classes
+        for (let p = 0; p < this.team.rows.length; p++) {
+          this.team.rows[p].setAttribute('class', this.team.row);
+        }
+
+        // Generate new quadrant
+        row.nextSibling.classList.add(this.team.row2);
+        row.classList.add(this.team.row1);
+        this.team.container.getElementsByClassName(this.team.row2)[0].nextSibling.classList.add(this.team.row3);
+        this.team.container.getElementsByClassName(this.team.row3)[0].nextSibling.classList.add(this.team.row4);
+        
       }
     }
   }
-
-    // var last_known_scroll_position = 0;
-    // var ticking = false;
-    // var self = this;
-    
-    // window.addEventListener('scroll', (e) => { 
-
-    //   if (!ticking) {
-    //     last_known_scroll_position = window.scrollY;
-
-    //     window.requestAnimationFrame(() => {       
-    //       if (this.elements.parallax.getBoundingClientRect().top <= 0) {
-    //         this.elements.parallax.classList.add(this.elements.fixed);
-    //         this.elements.parallax1.style.marginTop = '50vh';
-    //         this.elements.parallax1.classList.add(this.elements.relative);
-    //       }
-
-    //       if (this.elements.parallax1.getBoundingClientRect().top <= 0) {
-    //         this.elements.parallax.classList.remove(this.elements.fixed);
-    //         this.elements.parallax1.style.marginTop = '0';
-    //         this.elements.parallax1.classList.add(this.elements.fixed);
-    //         this.elements.parallax1.classList.remove(this.elements.relative);
-    //         this.elements.parallax2.style.marginTop = '50vh';
-    //         this.elements.parallax2.classList.add(this.elements.relative);
-    //       }
-
-    //       ticking = false;
-    //     });
-    //   }
-    //   ticking = true;
-    // });
 }
 
