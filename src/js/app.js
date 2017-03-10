@@ -1,4 +1,4 @@
 // App
-import Parallax from './app/parallax';
+import StoryTeam from './app/StoryTeam';
 
-const parallax = new Parallax();
+const storyTeam = new StoryTeam();

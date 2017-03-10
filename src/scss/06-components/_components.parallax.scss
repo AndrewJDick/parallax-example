@@ -1,6 +1,36 @@
-.c-parallax {
-  height: 50vh;
+.c-team {
   width: 100%;
+
+  &__row {
+
+    &--1 {
+      left: 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 5;
+    }
+
+    &--2 {
+      left: 0;
+      position: fixed;
+      top: 50vh;
+      width: 100%;
+      z-index: 15;
+    }
+
+    &--3 {
+      position: relative;
+      transform: translateY(50vh);
+      z-index: 10;
+    }
+
+    &--4 {
+      position: relative;
+      transform: translateY(50vh);
+      z-index: 20;
+    }
+  }
 
   &__panel {
     height: 50vh;
