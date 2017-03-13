@@ -39,33 +39,25 @@ export default class StoryTeam {
       const windowBot = window.innerHeight;
       const lastRowBot = this.team.rows[this.team.rows.length-1].getBoundingClientRect().bottom;
 
-
-      console.log(`container bot = ${containerBot}`);
-
       if (containerTop < 0 && this.active === true) {
-        this.fixedTopRows();
+        this.gridOverlap();
       }
 
       if (lastRowBot < windowBot && this.active === true) {
-        this.clearClasses(containerBot);
+        this.clearClasses();
       }
     });
   }
 
 
-  fixedTopRows() { 
+  gridOverlap() { 
 
     const rowHeight = this.team.container.offsetHeight / this.team.rows.length; 
-    
-    
-    //console.log(containerTop);
 
     for (let r = 0; r < this.team.rows.length; r++) {
 
       const row1 = this.team.rows[r];
       const row1Top = row1.getBoundingClientRect().top;
-
-
 
       if ( row1Top < 0) {
 
