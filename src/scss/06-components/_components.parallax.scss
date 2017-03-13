@@ -6,24 +6,14 @@
 
   &__row {
 
-    &--upper,
-    &--lower {
-      left: 0;
+    &--fixed {
       position: fixed;
+      left: 0;
       width: 100%;
     }
 
-    &--upper {
-      top: 0;
-    }
-
-    &--lower {
-      top: 50vh;
-    }
-
     &--relative {
-      position: relative;
-      transform: translateY(50vh);  
+      position: relative; 
     }
 
     &--1 {
@@ -36,10 +26,32 @@
 
     &--3 {
       z-index: 10;
+      transform: translateY(50vh);
     }
 
     &--4 {
       z-index: 20;
+      transform: translateY(50vh);
+    }
+
+    &--5 {
+      z-index: 15;
+      transform: translateY(100vh);
+    }
+
+    &--6 {
+      z-index: 30;
+      transform: translateY(100vh); 
+    }
+
+    &--upper {
+      top: 0;
+      transform: translateY(0);
+    }
+
+    &--lower {
+      top: 50vh;
+      transform: translateY(0);
     }
   }
 }
