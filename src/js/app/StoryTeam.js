@@ -2,7 +2,7 @@ export default class StoryTeam {
   
   constructor() {
     this.elements = {
-      window,
+      window: window,
       html: document.querySelectorAll('html')[0],
       body: document.querySelectorAll('body')[0]
     }
@@ -22,6 +22,8 @@ export default class StoryTeam {
       row4: 'c-team__row--4'
     }
 
+    this.active = true,
+
     this.listeners();
   }
 
@@ -32,20 +34,21 @@ export default class StoryTeam {
 
     this.elements.window.addEventListener('scroll', (e) => { 
 
-      let last_known_scroll_position = 0;
-      let ticking = false;
-      let that = this;
+      const containerTop = this.team.container.getBoundingClientRect().top;
+      const containerBot = this.team.container.getBoundingClientRect().bottom;
+      const windowBot = window.innerHeight;
+      const lastRowBot = this.team.rows[this.team.rows.length-1].getBoundingClientRect().bottom;
 
-      if (!ticking) {
-        last_known_scroll_position = this.elements.window.scrollY;
 
-        this.elements.window.requestAnimationFrame(() => { 
-          that.fixedTopRows();
-          ticking = false;
-        })
+      console.log(`container bot = ${containerBot}`);
+
+      if (containerTop < 0 && this.active === true) {
+        this.fixedTopRows();
       }
 
-      ticking = true;
+      if (lastRowBot < windowBot && this.active === true) {
+        this.clearClasses(containerBot);
+      }
     });
   }
 
@@ -53,7 +56,7 @@ export default class StoryTeam {
   fixedTopRows() { 
 
     const rowHeight = this.team.container.offsetHeight / this.team.rows.length; 
-    const containerTop = this.team.container.getBoundingClientRect().top;
+    
     
     //console.log(containerTop);
 
@@ -63,21 +66,34 @@ export default class StoryTeam {
       const row1Top = row1.getBoundingClientRect().top;
 
 
-      if ( row1Top < 0 ) {
+
+      if ( row1Top < 0) {
 
         const row2 = row1.nextSibling;
-        const row3 = row2.nextSibling;
-        const row4 = row3.nextSibling;
 
         row1.classList.add(this.team.fixed, this.team.upper);
         row2.classList.add(this.team.fixed, this.team.lower);
 
         row1.classList.remove(this.team.relative);
         row2.classList.remove(this.team.relative);
-        
-        row3.classList.add(this.team.relative);
-        row4.classList.add(this.team.relative);
+
+        if (r <= 3) {
+          const row3 = row2.nextSibling;
+          const row4 = row3.nextSibling;
+
+          row3.classList.add(this.team.relative);
+          row4.classList.add(this.team.relative);
+        }
       }
+    }
+  }
+
+  clearClasses(containerBot) {
+
+    this.active = false;
+    
+    for (let r = 0; r < this.team.rows.length; r++) {
+      this.team.rows[r].setAttribute('class', this.team.row)
     }
   }
 }
