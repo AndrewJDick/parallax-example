@@ -9,17 +9,12 @@ export default class StoryTeam {
 
     this.team = {
       container: document.querySelectorAll('#story-team')[0],
-      panels: document.querySelectorAll('.c-team__panel'),
       rows: document.querySelectorAll('.c-team__row'),
       row:  'c-team__row',
       upper: 'c-team__row--upper', 
       lower: 'c-team__row--lower',
       fixed: 'c-team__row--fixed',
       relative: 'c-team__row--relative',
-      row1: 'c-team__row--1',
-      row2: 'c-team__row--2',
-      row3: 'c-team__row--3',
-      row4: 'c-team__row--4'
     }
 
     this.active = true,
@@ -30,14 +25,11 @@ export default class StoryTeam {
 
   listeners() {
 
-    //window.alert('hi');
-
     this.elements.window.addEventListener('scroll', (e) => { 
 
       const containerTop = this.team.container.getBoundingClientRect().top;
-      const containerBot = this.team.container.getBoundingClientRect().bottom;
-      const windowBot = window.innerHeight;
       const lastRowBot = this.team.rows[this.team.rows.length-1].getBoundingClientRect().bottom;
+      const windowBot = window.innerHeight;
 
       if (containerTop < 0 && this.active === true) {
         this.gridOverlap();
@@ -69,6 +61,7 @@ export default class StoryTeam {
         row1.classList.remove(this.team.relative);
         row2.classList.remove(this.team.relative);
 
+        // TODO: Amend to ignore if no previous siblings are present, rather than an integer value
         if (r <= 3) {
           const row3 = row2.nextSibling;
           const row4 = row3.nextSibling;
@@ -80,7 +73,7 @@ export default class StoryTeam {
     }
   }
 
-  clearClasses(containerBot) {
+  clearClasses() {
 
     this.active = false;
     
