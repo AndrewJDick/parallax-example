@@ -15,6 +15,7 @@ export default class StoryTeam {
       lower: 'c-team__row--lower',
       fixed: 'c-team__row--fixed',
       relative: 'c-team__row--relative',
+      final: 'c-team__row--final'
     }
 
     this.active = true,
@@ -79,6 +80,10 @@ export default class StoryTeam {
     
     for (let r = 0; r < this.team.rows.length; r++) {
       this.team.rows[r].setAttribute('class', this.team.row)
+
+      if (r === this.team.rows.length - 1 || r === this.team.rows.length - 2) {
+        this.team.rows[r].classList.add(this.team.final);
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 .c-team {
 
-  height: 300vh;
+  height: 200vh;
+  overflow: hidden;
 
   &__panel {
     height: 50vh;
@@ -54,6 +55,10 @@
     &--lower {
       top: 50vh;
       transform: translateY(0);
+    }
+
+    &--final {
+      transform: translateY(-100vh);
     }
   }
 }
