@@ -23,6 +23,17 @@ export default class StoryTeam {
       direction: false
     }
 
+    this.init();
+  }
+
+  init() {
+    this.team.quadrants.forEach( (quadrant, index) => {
+
+      quadrant.setAttribute('pTop', 0);
+      quadrant.setAttribute('cTop', 0);
+    
+    });
+
     this.listeners();
   }
 
@@ -51,15 +62,6 @@ export default class StoryTeam {
   }
 
 
-  isVisible(element) {
-    const elemTop = element.getBoundingClientRect().top;
-    const elemBottom = element.getBoundingClientRect().bottom;
-
-    const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
-    return isVisible;
-  }
-
-
   clearClasses() {
     this.team.rows.forEach((row, index) => {
       row.setAttribute('class', `${this.team.row} ${this.team.row}--${index + 1}`);
@@ -71,7 +73,14 @@ export default class StoryTeam {
 
     this.team.quadrants.forEach( (quadrant, index) => {
 
-      if (this.isVisible(quadrant) && this.scroll.direction) {
+      quadrant.setAttribute('cTop', quadrant.getBoundingClientRect().top);
+
+      let currentTop = quadrant.getAttribute('cTop');
+      let previousTop = quadrant.getAttribute('pTop');
+
+      if (previousTop > 0 && currentTop < 0 && this.scroll.direction) {
+
+        console.log('bang');
 
         quadrant.firstChild.classList.add(this.team.upper);
         quadrant.lastChild.classList.add(this.team.lower);
@@ -109,46 +118,92 @@ export default class StoryTeam {
         }
       }
 
-      if (this.isVisible(quadrant) && !this.scroll.direction) {
+      quadrant.setAttribute('pTop', currentTop);
+
+    //   // if (this.isVisible1(quadrant) && this.scroll.direction) {
+
+    //   //   quadrant.firstChild.classList.add(this.team.upper);
+    //   //   quadrant.lastChild.classList.add(this.team.lower);
+
+    //   //   quadrant.firstChild.classList.remove(this.team.relative);
+    //   //   quadrant.lastChild.classList.remove(this.team.relative);
+
+    //   //   quadrant.firstChild.style.zIndex = 5;
+    //   //   quadrant.lastChild.style.zIndex = 15;
+
+    //   //   if (quadrant.previousSibling) {
+
+    //   //     quadrant.previousSibling.firstChild.classList.remove(this.team.upper);
+    //   //     quadrant.previousSibling.lastChild.classList.remove(this.team.lower);
+
+    //   //     quadrant.previousSibling.firstChild.classList.add(this.team.relative);
+    //   //     quadrant.previousSibling.lastChild.classList.add(this.team.relative);
+
+    //   //     quadrant.previousSibling.firstChild.style.zIndex = 10;
+    //   //     quadrant.previousSibling.lastChild.style.zIndex = 20;
+    //   //   } 
         
-        quadrant.firstChild.classList.add(this.team.upper);
-        quadrant.lastChild.classList.add(this.team.lower);
+    //   //   if (quadrant.nextSibling) {
+    
+    //   //     quadrant.firstChild.classList.remove(this.team.relative);
+    //   //     quadrant.lastChild.classList.remove(this.team.relative);
 
-        quadrant.firstChild.classList.remove(this.team.relative);
-        quadrant.lastChild.classList.remove(this.team.relative);
+    //   //     quadrant.nextSibling.firstChild.classList.add(this.team.relative);
+    //   //     quadrant.nextSibling.lastChild.classList.add(this.team.relative);
 
-        quadrant.firstChild.style.zIndex = 15;
-        quadrant.lastChild.style.zIndex = 5;
+    //   //     quadrant.nextSibling.firstChild.style.zIndex = 10;
+    //   //     quadrant.nextSibling.lastChild.style.zIndex = 20;
+    //   //   } else {
+    //   //     this.clearClasses();
+    //   //   }
+    //   // }
 
-        if (quadrant.nextSibling) {
+    //   // if (this.isVisible(quadrant) && !this.scroll.direction) {
+        
+    //   //   quadrant.firstChild.classList.add(this.team.upper);
+    //   //   quadrant.lastChild.classList.add(this.team.lower);
 
-          quadrant.nextSibling.firstChild.classList.remove(this.team.upper);
-          quadrant.nextSibling.lastChild.classList.remove(this.team.lower);
+    //   //   quadrant.firstChild.classList.remove(this.team.relative);
+    //   //   quadrant.lastChild.classList.remove(this.team.relative);
 
-          quadrant.nextSibling.firstChild.classList.add(this.team.relative);
-          quadrant.nextSibling.lastChild.classList.add(this.team.relative);
+    //   //   quadrant.firstChild.style.zIndex = 15;
+    //   //   quadrant.lastChild.style.zIndex = 5;
 
-          quadrant.nextSibling.firstChild.style.zIndex = 20;
-          quadrant.nextSibling.lastChild.style.zIndex = 10;
-        }
+    //   //   if (quadrant.nextSibling) {
 
-        if (quadrant.previousSibling) {
+    //   //     quadrant.nextSibling.firstChild.classList.remove(this.team.upper);
+    //   //     quadrant.nextSibling.lastChild.classList.remove(this.team.lower);
 
-          quadrant.previousSibling.firstChild.classList.remove(this.team.upper);
-          quadrant.previousSibling.lastChild.classList.remove(this.team.lower);
+    //   //     quadrant.nextSibling.firstChild.classList.add(this.team.relative);
+    //   //     quadrant.nextSibling.lastChild.classList.add(this.team.relative);
 
-          quadrant.previousSibling.firstChild.classList.add(this.team.relative);
-          quadrant.previousSibling.lastChild.classList.add(this.team.relative);
+    //   //     quadrant.nextSibling.firstChild.style.zIndex = 20;
+    //   //     quadrant.nextSibling.lastChild.style.zIndex = 10;
+    //   //   }
 
-          quadrant.previousSibling.firstChild.style.zIndex = 20;
-          quadrant.previousSibling.lastChild.style.zIndex = 10;
-        } else {
-          this.clearClasses();
-        }
+    //   //   if (quadrant.previousSibling) {
 
-      }
+    //   //     quadrant.previousSibling.firstChild.classList.remove(this.team.upper);
+    //   //     quadrant.previousSibling.lastChild.classList.remove(this.team.lower);
+
+    //   //     quadrant.previousSibling.firstChild.classList.add(this.team.relative);
+    //   //     quadrant.previousSibling.lastChild.classList.add(this.team.relative);
+
+    //   //     quadrant.previousSibling.firstChild.style.zIndex = 20;
+    //   //     quadrant.previousSibling.lastChild.style.zIndex = 10;
+    //   //   } else {
+    //   //     this.clearClasses();
+    //   //   }
+    //   // }
 
     });
+  }
+
+  isVisible(element) {
+    const elemTop = element.getBoundingClientRect().top;
+
+    const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+    return isVisible;
   }
 }
 
