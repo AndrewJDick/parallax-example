@@ -14,7 +14,6 @@ export default class StoryTeam {
       row:  'c-team__row',
       upper: 'c-team__row--upper', 
       lower: 'c-team__row--lower',
-      fixed: 'c-team__row--fixed',
       relative: 'c-team__row--relative'
     }
 
@@ -51,22 +50,45 @@ export default class StoryTeam {
   }
 
 
+  isVisible(element) {
+    const elemTop = element.getBoundingClientRect().top;
+    const elemBottom = element.getBoundingClientRect().bottom;
+
+    const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+    return isVisible;
+  }
+
+
+  clearClasses() {
+    this.team.rows.forEach((row, index) => {
+      row.setAttribute('class', `${this.team.row} ${this.team.row}--${index + 1}`);
+    });
+  }
+
+
   gridOverlap() { 
 
-    (this.scroll.direction) ? console.log('scrollDown') : console.log('scrollUp');
+    // (this.scroll.direction) ? console.log('scrollDown') : console.log('scrollUp');
 
-    // this.team.quadrants.forEach( (quadrant, index) => {
+    this.team.quadrants.forEach( (quadrant, index) => {
 
-    //   if (this.isVisible(quadrant) && scrollDirection) {
+      if (this.isVisible(quadrant) && this.scroll.direction) {
         
-    //     quadrant.firstChild.classList.add(this.team.upper);
-    //     quadrant.lastChild.classList.add(this.team.lower);
+        if (quadrant.nextSibling) {
+          quadrant.firstChild.classList.add(this.team.upper);
+          quadrant.lastChild.classList.add(this.team.lower);
 
-    //     quadrant.nextSibling.firstChild.classList.add(this.team.relative);
-    //     quadrant.nextSibling.lastChild.classList.add(this.team.relative);
-    //   }
+          quadrant.firstChild.classList.remove(this.team.relative);
+          quadrant.lastChild.classList.remove(this.team.relative);
 
-    // });
+          quadrant.nextSibling.firstChild.classList.add(this.team.relative);
+          quadrant.nextSibling.lastChild.classList.add(this.team.relative);
+        } else {
+          this.clearClasses();
+        }
+      }
+
+    });
 
       // this.team.rows.forEach( (row, index) => {
       //   const lastRow = this.team.container.lastChild.getBoundingClientRect().bottom;
@@ -114,13 +136,7 @@ export default class StoryTeam {
       // });
   }
 
-  isVisible(element) {
-    const elemTop = element.getBoundingClientRect().top;
-    const elemBottom = element.getBoundingClientRect().bottom;
-
-    const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
-    return isVisible;
-  }
+ 
 
   scrollUp() {
     
@@ -161,11 +177,7 @@ export default class StoryTeam {
     // });
   }
 
-  clearClasses() {
-    this.team.rows.forEach((row) => {
-      row.setAttribute('class', `${this.team.row} final`);
-    });
-  }
+  
 
   // injectPlaceholder(row) {
 
