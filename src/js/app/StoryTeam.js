@@ -29,8 +29,11 @@ export default class StoryTeam {
   init() {
     this.team.quadrants.forEach( (quadrant, index) => {
 
-      quadrant.setAttribute('pTop', 0);
-      quadrant.setAttribute('cTop', 0);
+      // quadrant.setAttribute('pTop', 0);
+      // quadrant.setAttribute('cTop', 0);
+
+      quadrant.setAttribute('pBot', 0);
+      quadrant.setAttribute('cBot', 0);
     
     });
 
@@ -74,10 +77,16 @@ export default class StoryTeam {
     this.team.quadrants.forEach( (quadrant, index) => {
 
       quadrant.setAttribute('cTop', quadrant.getBoundingClientRect().top);
+      quadrant.setAttribute('cBot', quadrant.getBoundingClientRect().bottom);
+
+      let viewportHeight = window.innerHeight;
 
       let currentTop = quadrant.getAttribute('cTop');
       let previousTop = quadrant.getAttribute('pTop');
+      let currentBot = quadrant.getAttribute('cBot');
+      let previousBot = quadrant.getAttribute('pBot');
 
+      // User is scrolling down and the quadrant crosses the top of the viewport
       if (previousTop > 0 && currentTop < 0 && this.scroll.direction) {
 
         console.log('bang');
@@ -118,92 +127,49 @@ export default class StoryTeam {
         }
       }
 
+      // User is scrolling up and the quadrant crosses the bottom of the viewport
+      if (previousBot < viewportHeight && currentBot > viewportHeight && !this.scroll.direction) {
+
+        quadrant.firstChild.classList.add(this.team.upper);
+        quadrant.lastChild.classList.add(this.team.lower);
+
+        quadrant.firstChild.classList.remove(this.team.relative);
+        quadrant.lastChild.classList.remove(this.team.relative);
+
+        quadrant.firstChild.style.zIndex = 15;
+        quadrant.lastChild.style.zIndex = 5;
+
+        if (quadrant.nextSibling) {
+
+          quadrant.nextSibling.firstChild.classList.remove(this.team.upper);
+          quadrant.nextSibling.lastChild.classList.remove(this.team.lower);
+
+          quadrant.nextSibling.firstChild.classList.add(this.team.relative);
+          quadrant.nextSibling.lastChild.classList.add(this.team.relative);
+
+          quadrant.nextSibling.firstChild.style.zIndex = 20;
+          quadrant.nextSibling.lastChild.style.zIndex = 10;
+        }
+
+        if (quadrant.previousSibling) {
+
+          quadrant.previousSibling.firstChild.classList.remove(this.team.upper);
+          quadrant.previousSibling.lastChild.classList.remove(this.team.lower);
+
+          quadrant.previousSibling.firstChild.classList.add(this.team.relative);
+          quadrant.previousSibling.lastChild.classList.add(this.team.relative);
+
+          quadrant.previousSibling.firstChild.style.zIndex = 20;
+          quadrant.previousSibling.lastChild.style.zIndex = 10;
+        } else {
+          this.clearClasses();
+        }
+      }
+
       quadrant.setAttribute('pTop', currentTop);
-
-    //   // if (this.isVisible1(quadrant) && this.scroll.direction) {
-
-    //   //   quadrant.firstChild.classList.add(this.team.upper);
-    //   //   quadrant.lastChild.classList.add(this.team.lower);
-
-    //   //   quadrant.firstChild.classList.remove(this.team.relative);
-    //   //   quadrant.lastChild.classList.remove(this.team.relative);
-
-    //   //   quadrant.firstChild.style.zIndex = 5;
-    //   //   quadrant.lastChild.style.zIndex = 15;
-
-    //   //   if (quadrant.previousSibling) {
-
-    //   //     quadrant.previousSibling.firstChild.classList.remove(this.team.upper);
-    //   //     quadrant.previousSibling.lastChild.classList.remove(this.team.lower);
-
-    //   //     quadrant.previousSibling.firstChild.classList.add(this.team.relative);
-    //   //     quadrant.previousSibling.lastChild.classList.add(this.team.relative);
-
-    //   //     quadrant.previousSibling.firstChild.style.zIndex = 10;
-    //   //     quadrant.previousSibling.lastChild.style.zIndex = 20;
-    //   //   } 
-        
-    //   //   if (quadrant.nextSibling) {
-    
-    //   //     quadrant.firstChild.classList.remove(this.team.relative);
-    //   //     quadrant.lastChild.classList.remove(this.team.relative);
-
-    //   //     quadrant.nextSibling.firstChild.classList.add(this.team.relative);
-    //   //     quadrant.nextSibling.lastChild.classList.add(this.team.relative);
-
-    //   //     quadrant.nextSibling.firstChild.style.zIndex = 10;
-    //   //     quadrant.nextSibling.lastChild.style.zIndex = 20;
-    //   //   } else {
-    //   //     this.clearClasses();
-    //   //   }
-    //   // }
-
-    //   // if (this.isVisible(quadrant) && !this.scroll.direction) {
-        
-    //   //   quadrant.firstChild.classList.add(this.team.upper);
-    //   //   quadrant.lastChild.classList.add(this.team.lower);
-
-    //   //   quadrant.firstChild.classList.remove(this.team.relative);
-    //   //   quadrant.lastChild.classList.remove(this.team.relative);
-
-    //   //   quadrant.firstChild.style.zIndex = 15;
-    //   //   quadrant.lastChild.style.zIndex = 5;
-
-    //   //   if (quadrant.nextSibling) {
-
-    //   //     quadrant.nextSibling.firstChild.classList.remove(this.team.upper);
-    //   //     quadrant.nextSibling.lastChild.classList.remove(this.team.lower);
-
-    //   //     quadrant.nextSibling.firstChild.classList.add(this.team.relative);
-    //   //     quadrant.nextSibling.lastChild.classList.add(this.team.relative);
-
-    //   //     quadrant.nextSibling.firstChild.style.zIndex = 20;
-    //   //     quadrant.nextSibling.lastChild.style.zIndex = 10;
-    //   //   }
-
-    //   //   if (quadrant.previousSibling) {
-
-    //   //     quadrant.previousSibling.firstChild.classList.remove(this.team.upper);
-    //   //     quadrant.previousSibling.lastChild.classList.remove(this.team.lower);
-
-    //   //     quadrant.previousSibling.firstChild.classList.add(this.team.relative);
-    //   //     quadrant.previousSibling.lastChild.classList.add(this.team.relative);
-
-    //   //     quadrant.previousSibling.firstChild.style.zIndex = 20;
-    //   //     quadrant.previousSibling.lastChild.style.zIndex = 10;
-    //   //   } else {
-    //   //     this.clearClasses();
-    //   //   }
-    //   // }
+      quadrant.setAttribute('pBot', currentBot);
 
     });
-  }
-
-  isVisible(element) {
-    const elemTop = element.getBoundingClientRect().top;
-
-    const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
-    return isVisible;
   }
 }
 
