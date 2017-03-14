@@ -14,11 +14,8 @@ export default class StoryTeam {
       upper: 'c-team__row--upper', 
       lower: 'c-team__row--lower',
       fixed: 'c-team__row--fixed',
-      relative: 'c-team__row--relative',
-      final: 'c-team__row--final'
+      relative: 'c-team__row--relative'
     }
-
-    this.active = true,
 
     this.listeners();
   }
@@ -26,64 +23,88 @@ export default class StoryTeam {
 
   listeners() {
 
+    let previousScrollPosition = 0;
+
     this.elements.window.addEventListener('scroll', (e) => { 
 
-      const containerTop = this.team.container.getBoundingClientRect().top;
-      const lastRowBot = this.team.rows[this.team.rows.length-1].getBoundingClientRect().bottom;
-      const windowBot = window.innerHeight;
+      const currentScrollPosition = this.elements.window.pageYOffset;
 
-      if (containerTop < 0 && this.active === true) {
-        this.gridOverlap();
-      }
+      (currentScrollPosition > previousScrollPosition)
+        ? this.scrollDown()
+        : this.scrollUp();
 
-      if (lastRowBot < windowBot && this.active === true) {
+      previousScrollPosition = currentScrollPosition;
+    });
+  }
+
+
+  scrollDown() { 
+
+    this.team.rows.forEach( (row) => {
+      const lastRow = this.team.container.lastChild.getBoundingClientRect().bottom;
+      const viewportHeight = this.elements.window.innerHeight;
+      const row1 = row;
+
+      let row2, row3, row4;
+
+      // Fix a row to the browser window once it hits the top of the page
+      if ( row1.getBoundingClientRect().top < 0 && lastRow > window.innerHeight) {
+
+        if (row1.nextSibling) {
+          row2 = row1.nextSibling;
+
+          row1.classList.add(this.team.upper);
+          row2.classList.add(this.team.lower);
+
+          row1.classList.remove(this.team.relative);
+          row2.classList.remove(this.team.relative);
+        }
+
+        if (row2.nextSibling) {
+          row3 = row2.nextSibling;
+          row4 = row3.nextSibling;
+
+          row3.classList.add(this.team.relative);
+          row4.classList.add(this.team.relative);
+        }
+      } 
+
+      if (lastRow < window.innerHeight) {
         this.clearClasses();
       }
     });
   }
 
-
-  gridOverlap() { 
-
-    const rowHeight = this.team.container.offsetHeight / this.team.rows.length; 
-
-    for (let r = 0; r < this.team.rows.length; r++) {
-
-      const row1 = this.team.rows[r];
-      const row1Top = row1.getBoundingClientRect().top;
-
-      if ( row1Top < 0) {
-
-        const row2 = row1.nextSibling;
-
-        row1.classList.add(this.team.fixed, this.team.upper);
-        row2.classList.add(this.team.fixed, this.team.lower);
-
-        row1.classList.remove(this.team.relative);
-        row2.classList.remove(this.team.relative);
-
-        // TODO: Amend to ignore if no previous siblings are present, rather than an integer value
-        if (r <= 3) {
-          const row3 = row2.nextSibling;
-          const row4 = row3.nextSibling;
-
-          row3.classList.add(this.team.relative);
-          row4.classList.add(this.team.relative);
-        }
-      }
-    }
+  scrollUp() {
+    console.log('scroll up');
   }
 
   clearClasses() {
+    this.team.rows.forEach((row) => {
+      row.setAttribute('class', `${this.team.row} final`);
+    });
+  }
 
-    this.active = false;
+  injectPlaceholder(row) {
+
+    const element = this.team.container;
+    const fragment = document.createDocumentFragment();
+
+    var div = document.createElement('div');
+    div.style.height = '50vh';
+    div.setAttribute('class', 'js-placeholder');
+    fragment.appendChild(div);
+
+    element.insertBefore(fragment, row);
+
+  }
+
+  removePlaceholders() {
+
+    const placeholders = document.getElementsByClassName('js-placeholder');
     
-    for (let r = 0; r < this.team.rows.length; r++) {
-      this.team.rows[r].setAttribute('class', this.team.row)
-
-      if (r === this.team.rows.length - 1 || r === this.team.rows.length - 2) {
-        this.team.rows[r].classList.add(this.team.final);
-      }
+    for (let p = 0; p < placeholders.length; p++) {
+      placeholders[p].parentNode.removeChild(placeholders[p]);
     }
   }
 }

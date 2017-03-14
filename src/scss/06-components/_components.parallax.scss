@@ -3,17 +3,12 @@
   height: 200vh;
   overflow: hidden;
 
+
   &__panel {
     height: 50vh;
   }
 
   &__row {
-
-    &--fixed {
-      position: fixed;
-      left: 0;
-      width: 100%;
-    }
 
     &--relative {
       position: relative; 
@@ -47,6 +42,13 @@
       transform: translateY(100vh); 
     }
 
+    &--upper, 
+    &--lower {
+      position: fixed;
+      left: 0;
+      width: 100%;
+    }
+
     &--upper {
       top: 0;
       transform: translateY(0);
@@ -56,9 +58,9 @@
       top: 50vh;
       transform: translateY(0);
     }
-
-    &--final {
-      transform: translateY(-100vh);
-    }
   }
+}
+
+.final {
+  transform: translateY(-100vh); 
 }
