@@ -29,8 +29,8 @@ export default class StoryTeam {
   init() {
     this.team.quadrants.forEach( (quadrant, index) => {
 
-      // quadrant.setAttribute('pTop', 0);
-      // quadrant.setAttribute('cTop', 0);
+      quadrant.setAttribute('pTop', 0);
+      quadrant.setAttribute('cTop', 0);
 
       quadrant.setAttribute('pBot', 0);
       quadrant.setAttribute('cBot', 0);
@@ -50,9 +50,14 @@ export default class StoryTeam {
 
       this.scrollDirection(this.scroll.previous, this.scroll.current);
 
+      this.gridOverlap();
+
       this.scroll.previous = this.scroll.current;
     });
+
   }
+
+  
 
 
   scrollDirection(previous, current) {
@@ -61,7 +66,6 @@ export default class StoryTeam {
       ? this.scroll.direction = true
       : this.scroll.direction = false;
 
-    this.gridOverlap();
   }
 
 
@@ -87,9 +91,7 @@ export default class StoryTeam {
       let previousBot = quadrant.getAttribute('pBot');
 
       // User is scrolling down and the quadrant crosses the top of the viewport
-      if (previousTop > 0 && currentTop < 0 && this.scroll.direction) {
-
-        console.log('bang');
+      if (previousTop > 0 && currentTop <= 0 && this.scroll.direction) {
 
         quadrant.firstChild.classList.add(this.team.upper);
         quadrant.lastChild.classList.add(this.team.lower);
@@ -128,7 +130,7 @@ export default class StoryTeam {
       }
 
       // User is scrolling up and the quadrant crosses the bottom of the viewport
-      if (previousBot < viewportHeight && currentBot > viewportHeight && !this.scroll.direction) {
+      if (previousBot < viewportHeight && currentBot >= viewportHeight && !this.scroll.direction) {
 
         quadrant.firstChild.classList.add(this.team.upper);
         quadrant.lastChild.classList.add(this.team.lower);
