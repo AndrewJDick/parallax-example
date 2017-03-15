@@ -2,12 +2,17 @@ export default class StoryTeam {
   
   constructor() {
 
+    this.Elements = {
+      quadrants: document.querySelectorAll('.c-team__quadrant'),
+      rows: document.querySelectorAll('.c-team__row')
+    };
+
     this.scroll = {
       previous: 0,
       current: 0,
       direction: false,
       ticking: false
-    }
+    };
 
     this.listeners();
   }
@@ -48,11 +53,6 @@ export default class StoryTeam {
 
       const viewportHeight = window.innerHeight;
 
-      const teamElements = {
-        quadrants: document.querySelectorAll('.c-team__quadrant'),
-        rows: document.querySelectorAll('.c-team__row')
-      };
-
       const teamClasses = { 
         row:  'c-team__row',
         upper: 'c-team__row--upper', 
@@ -60,13 +60,20 @@ export default class StoryTeam {
         relative: 'c-team__row--relative'
       };
 
-      teamElements.quadrants.forEach( (quadrant) => {
+      this.Elements.quadrants.forEach( (quadrant) => {
 
-        const quadrantTop = quadrant.getBoundingClientRect().top;
-        const quadrantBot = quadrant.getBoundingClientRect().bottom;
-        
+        quadrant.setAttribute('cT', quadrant.getBoundingClientRect().top);
+        quadrant.setAttribute('cB', quadrant.getBoundingClientRect().bottom);
+
+        const currentTop = quadrant.getAttribute('cT');
+        const currentBot = quadrant.getAttribute('cB');
+
+        const previousTop = quadrant.getAttribute('pT');
+        const previousBot = quadrant.getAttribute('pB');
+
+
         // Scroll down
-        if (quadrantTop <= 0 && quadrantBot > 0 && this.scroll.direction) {
+        if (previousTop > 0 && currentTop <= 0 && this.scroll.direction) {
 
           quadrant.firstChild.classList.add(teamClasses.upper);
           quadrant.lastChild.classList.add(teamClasses.lower);
@@ -100,12 +107,12 @@ export default class StoryTeam {
             quadrant.nextSibling.firstChild.style.zIndex = 10;
             quadrant.nextSibling.lastChild.style.zIndex = 20;
           } else {
-            this.clearClasses(teamElements.rows, teamClasses);
+            this.clearClasses(this.Elements.rows, teamClasses);
           }
         }
 
         // Scroll Up
-        if (quadrantBot >= viewportHeight && quadrantTop < viewportHeight && !this.scroll.direction) {
+        if (previousBot < viewportHeight && currentBot >= viewportHeight && !this.scroll.direction) {
 
           quadrant.firstChild.classList.add(teamClasses.upper);
           quadrant.lastChild.classList.add(teamClasses.lower);
@@ -139,9 +146,12 @@ export default class StoryTeam {
             quadrant.previousSibling.firstChild.style.zIndex = 20;
             quadrant.previousSibling.lastChild.style.zIndex = 10;
           } else {
-            this.clearClasses(teamElements.rows, teamClasses);
+            this.clearClasses(this.Elements.rows, teamClasses);
           }
         }
+
+        quadrant.setAttribute('pT', currentTop);
+        quadrant.setAttribute('pB', currentBot);
       });
     }
   }
