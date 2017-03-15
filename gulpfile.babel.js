@@ -11,6 +11,7 @@ const  gulp 			   = require('gulp'),
 	     imagemin 		 = require('gulp-imagemin'),
 	     rename 			 = require('gulp-rename'),
 	     connectMulti  = require('gulp-connect-multi'),
+       sourcemaps    = require('gulp-sourcemaps'),
 	     connect 		   = connectMulti();
 
 
@@ -81,6 +82,8 @@ gulp.task('scripts:main', () => {
     .pipe(browserify({
       insertGlobals : true 
     }))
+    .pipe(sourcemaps.init())
+    .pipe(sourcemaps.write())
 		//.pipe(uglify())
 		.pipe(gulp.dest('./dist/js'));
 });;
