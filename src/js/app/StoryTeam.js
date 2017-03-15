@@ -1,57 +1,52 @@
-export default class StoryTeam {
-  
-  constructor() {
+export default function storyTeam() {
 
-    this.Elements = {
-      quadrants: document.querySelectorAll('.c-team__quadrant'),
-      rows: document.querySelectorAll('.c-team__row')
-    };
+  const scrollAttr = {
+    previous: 0,
+    current: 0,
+    direction: false,
+    ticking: false
+  };
 
-    this.scroll = {
-      previous: 0,
-      current: 0,
-      direction: false,
-      ticking: false
-    };
-
-    this.listeners();
+  function listeners() {
+    window.addEventListener('scroll', () => onScroll(), false);
   }
 
-  listeners() {
-    window.addEventListener('scroll', () => this.onScroll(), false);
-  }
-
-  onScroll() {
-    this.scroll.current = window.scrollY;
+  function onScroll() {
+    scrollAttr.current = window.scrollY;
     
-    this.scrollDirection();
-    this.requestTick();
+    scrollDirection();
+    requestTick();
 
-    this.scroll.previous = this.scroll.current;
+    scrollAttr.previous = scrollAttr.current;
   }
 
-  scrollDirection() {
-    (this.scroll.current > this.scroll.previous) 
-      ? this.scroll.direction = true    // Scroll Down
-      : this.scroll.direction = false;  // Scroll Up
+  function scrollDirection() {
+    (scrollAttr.current > scrollAttr.previous) 
+      ? scrollAttr.direction = true    // Scroll Down
+      : scrollAttr.direction = false;  // Scroll Up
   }
 
-  requestTick() {
-    if(!this.scroll.ticking) {
-      window.requestAnimationFrame(() => this.update());
+  function requestTick() {
+    if(!scrollAttr.ticking) {
+      window.requestAnimationFrame(() => update());
     }
-    this.scroll.ticking = true;
+    scrollAttr.ticking = true;
   }
 
-  update() { 
+  function update() { 
 
-    this.scroll.ticking = false;
+    scrollAttr.ticking = false;
 
     const peopleContainer = document.querySelectorAll('#story-team')[0];
 
     if (peopleContainer.getBoundingClientRect().top <= 0 || peopleContainer.getBoundingClientRect().bottom > 0 ) {
 
       const viewportHeight = window.innerHeight;
+
+      const gridElements = {
+        quadrants: document.querySelectorAll('.c-team__quadrant'),
+        rows: document.querySelectorAll('.c-team__row')
+      };
 
       const teamClasses = { 
         row:  'c-team__row',
@@ -60,7 +55,7 @@ export default class StoryTeam {
         relative: 'c-team__row--relative'
       };
 
-      this.Elements.quadrants.forEach( (quadrant) => {
+      gridElements.quadrants.forEach( (quadrant) => {
 
         quadrant.setAttribute('cT', quadrant.getBoundingClientRect().top);
         quadrant.setAttribute('cB', quadrant.getBoundingClientRect().bottom);
@@ -73,7 +68,7 @@ export default class StoryTeam {
 
 
         // Scroll down
-        if (previousTop > 0 && currentTop <= 0 && this.scroll.direction) {
+        if (previousTop > 0 && currentTop <= 0 && scrollAttr.direction) {
 
           quadrant.firstChild.classList.add(teamClasses.upper);
           quadrant.lastChild.classList.add(teamClasses.lower);
@@ -107,12 +102,12 @@ export default class StoryTeam {
             quadrant.nextSibling.firstChild.style.zIndex = 10;
             quadrant.nextSibling.lastChild.style.zIndex = 20;
           } else {
-            this.clearClasses(this.Elements.rows, teamClasses);
+            clearClasses(gridElements.rows, teamClasses);
           }
         }
 
         // Scroll Up
-        if (previousBot < viewportHeight && currentBot >= viewportHeight && !this.scroll.direction) {
+        if (previousBot < viewportHeight && currentBot >= viewportHeight && !scrollAttr.direction) {
 
           quadrant.firstChild.classList.add(teamClasses.upper);
           quadrant.lastChild.classList.add(teamClasses.lower);
@@ -146,7 +141,7 @@ export default class StoryTeam {
             quadrant.previousSibling.firstChild.style.zIndex = 20;
             quadrant.previousSibling.lastChild.style.zIndex = 10;
           } else {
-            this.clearClasses(this.Elements.rows, teamClasses);
+            clearClasses(gridElements.rows, teamClasses);
           }
         }
 
@@ -156,7 +151,7 @@ export default class StoryTeam {
     }
   }
 
-  clearClasses(rows, classes) {
+  function clearClasses(rows, classes) {
 
     rows.forEach((row, index) => {
       row.classList.remove(classes.upper);
@@ -164,5 +159,7 @@ export default class StoryTeam {
       row.classList.remove(classes.relative);
     });
   }
+
+  listeners();
 }
 

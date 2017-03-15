@@ -1,4 +1,4 @@
 // App
-import StoryTeam from './app/StoryTeam';
+import storyTeam from './app/StoryTeam';
 
-const storyTeam = new StoryTeam();
+storyTeam();
