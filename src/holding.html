@@ -14,21 +14,30 @@
 
     </head>
     <body>
-        <section id="holding-content" class="c-holding">
-          <img src="" class="c-holding__logo" alt="BRAND LOGO | WHATEVER IT CLAIMS TO BE" />
-          <p class="c-holding__title"> A WHOLE NEW WORLD </p>
-          <p class="c-holding__subtitle"> LAUNCHING MONTH 1234 | GO SOMEWHERE</p> 
-          <form class="c-holding__form">
-            <h2> BECOME SOMETHING IN A SOMETHING OF SOMETHINGS </h2>
-            <p> Pimpin' ipsum dolor sizzle amet, things adipiscing daahng dawg. Nullizzle sapien velizzle, dang volutpizzle, dang quis, shiz vizzle, sizzle. </p>
+      <main class="c-holding">
+        <section id="holding-content" class="c-holding__content">
+          <img src="http://placehold.it/500x190" class="c-holding__content__logo" alt="BRAND LOGO | WHATEVER IT CLAIMS TO BE" />
+          <p class="c-holding__content__title"> A WHOLE NEW WORLD </p>
+          <p class="c-holding__content__subtitle"> LAUNCHING MONTH 1234 | GO SOMEWHERE</p> 
+          <form class="c-holding__content__form">
+            <p class="c-holding__content__form__title"> BECOME SOMETHING IN A SOMETHING OF SOMETHINGS </h2>
+            <p class="c-holding__content__form__subtitle"> Pimpin' ipsum dolor sizzle amet, things adipiscing daahng dawg. Nullizzle sapien velizzle, dang volutpizzle, dang quis, shiz vizzle, sizzle. </p>
             
-            <input type="text" name="name" placeholder="First Name">
-            <input type="email" name="email" placeholder="Email Address">
+            <input class="c-holding__content__form__input" type="text" name="name" placeholder="First Name">
+            <input class="c-holding__content__form__input" type="email" name="email" placeholder="Email Address">
             <button type="submit">JOIN</button>
           </form>
         </section>
 
-        <script src="js/vendor.js"></script>
-        <script src="js/app.js"></script>
+        <div class="c-holding__mask">
+        </div>
+
+        <video class="c-holding__video" autoplay>
+          <source src="media/back.mp4" type="video/mp4">
+        </video>
+      </main>
+
+      <script src="js/vendor.js"></script>
+      <script src="js/app.js"></script>    
     </body>
 </html>

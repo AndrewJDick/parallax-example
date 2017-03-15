@@ -30,14 +30,14 @@ gulp.task('html:reload', ['html'], () => {
 
 // Media
 gulp.task('media', () => {
-	return gulp.src(['./src/img/*'])
-        .pipe(newer('./dist/img'))
+	return gulp.src(['./src/media/*'])
+        .pipe(newer('./dist/media'))
         .pipe(imagemin())
-        .pipe(gulp.dest('./dist/img'));
+        .pipe(gulp.dest('./dist/media'));
 });
 
 gulp.task('media:reload', ['media'], () => {
-    return gulp.src(['./src/img/*'])
+    return gulp.src(['./src/media/*'])
     	.pipe(connect.reload());
 });
 
