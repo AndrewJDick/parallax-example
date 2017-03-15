@@ -1,4 +1,4 @@
 // App
-import storyTeam from './app/StoryTeam';
+import storyPeople from './app/StoryPeople';
 
-storyTeam();
+storyPeople();
