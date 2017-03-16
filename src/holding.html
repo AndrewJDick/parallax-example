@@ -16,25 +16,27 @@
     <body>
       <main class="c-holding">
         <section id="holding-content" class="c-holding__content">
-          <img src="http://placehold.it/500x190" class="c-holding__content__logo" alt="BRAND LOGO | WHATEVER IT CLAIMS TO BE" />
-          <p class="c-holding__content__title"> A WHOLE NEW WORLD </p>
-          <p class="c-holding__content__subtitle"> LAUNCHING MONTH 1234 | GO SOMEWHERE</p> 
+          <img src="media/logo.png" class="c-holding__content__logo" alt="BRAND LOGO | WHATEVER IT CLAIMS TO BE" />
+          <p class="c-holding__content__title"> A whole world apart </p>
+          <ul class="c-holding__content__subtitle">
+            <li> LAUNCHING MONTH 1234 </li>
+            <li> GO SOMEWHERE </li>
+          </ul>
           <form class="c-holding__content__form">
-            <p class="c-holding__content__form__title"> BECOME SOMETHING IN A SOMETHING OF SOMETHINGS </h2>
+            <p class="c-holding__content__form__title"> BECOME PART OF A TRIBE OF WHISKY LOVERS </h2>
             <p class="c-holding__content__form__subtitle"> Pimpin' ipsum dolor sizzle amet, things adipiscing daahng dawg. Nullizzle sapien velizzle, dang volutpizzle, dang quis, shiz vizzle, sizzle. </p>
             
             <input class="c-holding__content__form__input" type="text" name="name" placeholder="First Name">
-            <input class="c-holding__content__form__input" type="email" name="email" placeholder="Email Address">
-            <button type="submit">JOIN</button>
+            <input class="c-holding__content__form__input" type="email" name="email" placeholder="Email Address" required>
+            <button class="c-holding__content__form__submit" type="submit">JOIN</button>
           </form>
         </section>
 
-        <div class="c-holding__mask">
-        </div>
-
-        <video class="c-holding__video" autoplay>
-          <source src="media/back.mp4" type="video/mp4">
+        <video id="holding-bgvid" class="c-holding__video" playsinline autoplay muted>
+          <source src="media/video.mp4" type="video/mp4">
         </video>
+
+        <div class="c-holding__mask"></div>
       </main>
 
       <script src="js/vendor.js"></script>

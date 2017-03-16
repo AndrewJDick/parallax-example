@@ -1,49 +1,88 @@
 .c-holding {
+  height: 100vh;
+  position: relative;
+  width: 100vw;
 
   &__content {
-    width: 33vw;
-    height: 50vh;
-    margin-top: 25vh;
-    margin-left: 33vw;
-    position: relative;
-    text-align: center;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
     z-index: 15;
+    
+    &__logo {
+      display: block;
+      margin: 0 auto;
+      width: 305px;
+    }
 
     &__title {
-      margin-top: 1rem;
+      text-align: center;
       text-transform: uppercase;
-      font-size: 36dpx;
+      font-size: 32px;
       font-weight: bold;
+      margin-bottom: 0;
+      margin-top: 40px;
     }
 
     &__subtitle {
+      font-size: 14px;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 60px;
 
+      li {
+        list-style-type: none;
+        display: inline-block;
+        width: 50%;
+
+        &:first-child {
+          text-align: right;
+
+          &::after {
+            content: "|";
+            padding-left: .5rem;
+          }
+        }
+
+        &:last-child {
+          padding-left: .5rem;
+          text-align: left;
+        }
+      }
     }
 
 
     &__form {
       background-color: $brand-primary-4;
-      box-sizing: border-box;
-      bottom: 0;
-      box-sizing: border-box;
-      padding: 1rem;
-      position: absolute;
-      width: 100%;
+      padding: .5rem;
 
       &__title {
         color: $brand-primary-1;
         font-size: 18px;
         margin-bottom: 0;
         padding: .25rem;
+        text-align: center;
         text-transform: uppercase;
       }
 
       &__subtitle {
         color: $brand-primary-1;
         font-size: 12px;
+        margin: 0 auto;
+        text-align: center;
+        width: 50%;
       }
 
+      &__input {
+      }
 
+      &__submit {
+        background-color: $brand-primary-4;
+        border: 1px solid $brand-primary-1;
+        color: $brand-primary-1;
+        padding: .5rem 2rem;
+      }
     }
   }
 
@@ -55,17 +94,21 @@
     position: fixed;
     transform: translate(-50%, -50%);
     width: 100vw;
-    z-index: 10;
+    z-index: -50;
   }
 
   &__video {
+    background: url() no-repeat;
+    background-size: cover;
+    height: auto;
     left: 50%;
-    top: 50%;
     min-height: 100%;
     min-width: 100%;
     position: fixed;
-    transform: translate(-50%, -50%);
-    z-index: 5;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: auto;
+    z-index: -100;
   }
 
 
