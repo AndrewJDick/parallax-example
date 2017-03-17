@@ -8,35 +8,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
-
         <link rel="stylesheet" href="css/main.css">
 
     </head>
     <body>
       <main class="c-holding">
-        <section id="holding-content" class="c-holding__content">
-          <img src="media/logo.png" class="c-holding__content__logo" alt="BRAND LOGO | WHATEVER IT CLAIMS TO BE" />
-          <p class="c-holding__content__title"> A whole world apart </p>
-          <ul class="c-holding__content__subtitle">
-            <li> LAUNCHING MONTH 1234 </li>
-            <li> GO SOMEWHERE </li>
+        <section id="holding-container" class="c-holding__container">
+          
+          <img src="media/logo.png" srcset="media/logo.png 1x, media/logo@2x.png 2x" class="c-holding__logo o-block" alt="HIGHLAND PARK | SINGLE MALT SCOTCH WHISKY" />
+
+          <p class="c-holding__title o-block u-margin-top-large u-margin-bottom-none"> It's nearly time to reveal our viking soul... </p>
+          
+          <ul class="o-block u-margin-top-small u-margin-bottom-large u-margin-left-none">
+            <li class="c-holding__links o-block--right"> New site launching end April 2017 </li>
+            <li class="c-holding__links o-block--left u-padding-left-small"> Visit our current site </li>
           </ul>
-          <form class="c-holding__content__form">
-            <p class="c-holding__content__form__title"> BECOME PART OF A TRIBE OF WHISKY LOVERS </h2>
-            <p class="c-holding__content__form__subtitle"> Pimpin' ipsum dolor sizzle amet, things adipiscing daahng dawg. Nullizzle sapien velizzle, dang volutpizzle, dang quis, shiz vizzle, sizzle. </p>
-            
-            <input class="c-holding__content__form__input" type="text" name="name" placeholder="First Name">
-            <input class="c-holding__content__form__input" type="email" name="email" placeholder="Email Address" required>
-            <button class="c-holding__content__form__submit" type="submit">JOIN</button>
+
+          <form class="c-holding__form">
+            <div class="c-holding__form__wrapper o-layout--flush">
+              <p class="c-holding__form__title o-layout__item u-margin-bottom"> Register now for exclusive advance access to our new site! </p>
+              
+              <div class="o-layout__item u-2/3 u-3/4@desktop">
+                <input class="c-holding__form__input c-holding__form__input--name u-padding-left-small" type="text" name="name" placeholder="First Name">
+                <input class="c-holding__form__input u-padding-left-small" type="email" name="email" placeholder="Email Address" required>
+              </div>
+
+              <div class="o-layout__item u-1/3 u-1/4@desktop">
+                <button class="c-holding__form__submit" type="submit">Register</button>
+              </div>
+            </div>
           </form>
         </section>
 
-        <video id="holding-bgvid" class="c-holding__video" playsinline autoplay muted>
-          <source src="media/video.mp4" type="video/mp4">
+        <video id="holding-bgvid" class="c-holding__video u-hidden" playsinline autoplay muted>
+          <source src="media/holding-video.mp4" type="video/mp4">
         </video>
 
-        <div class="c-holding__mask"></div>
       </main>
 
       <script src="js/vendor.js"></script>

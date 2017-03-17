@@ -1,7 +1,11 @@
+// Custom
+@import 'settings.overrides'; 
+@import 'settings.palette';
+@import 'settings.sass-mq';
+
 // Inuit CSS
 @import '../../../node_modules/inuitcss/settings/settings.core';
 
 
-// Custom
-@import 'settings.overrides'; 
-@import 'settings.palette'; 
+
+
