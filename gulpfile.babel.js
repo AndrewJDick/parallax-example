@@ -125,3 +125,7 @@ gulp.task('watch', () => {
 
 // Default
 gulp.task('default', ['html', 'media', 'styles', 'scripts', 'connect', 'watch']);
+
+gulp.task('deploy', ['html', 'media', 'styles', 'scripts']);
+
+
