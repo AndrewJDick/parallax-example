@@ -1,0 +1,24 @@
+// Typography
+
+// Font families
+$fontHighlandpark: 'highland_parkmedium', Arial, sans-serif;
+$fontRegular: 'Muli-Regular', Arial, sans-serif;
+$fontLight: 'mulilight', Arial, sans-serif;
+$fontBold: 'Muli-Bold', Arial, sans-serif;
+$fontSemiBold: 'Muli-SemiBold', Arial, sans-serif;
+$fontTradeGothicBold: 'TradeGothicNo.2-Bold', Arial, sans-serif;
+$fontawesome: 'FontAwesome', Arial, sans-serif;
+$base-font-family: $fontRegular;
+$heading-font-family: $base-font-family;
+
+$font-size: 18px;
+
+// Font Sizes.
+$base-font-size: $font-size;
+
+// Line height.
+$base-line-height: 1.5;
+$heading-line-height: 1.3;
+
+// Letter spacing.
+$base-letter-spacing: 1px;

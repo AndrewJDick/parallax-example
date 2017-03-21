@@ -1,0 +1,91 @@
+
+// Variables
+// --------------------------
+
+$hp-font-path:        "./fonts" !default;
+$hp-font-size-base:   14px !default;
+
+// Include fonts
+@font-face {
+    font-family: 'highland_parkmedium';
+    src: url('../fonts/highland_park_medium_-_full-webfont.eot');
+    src: url('../fonts/highland_park_medium_-_full-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/highland_park_medium_-_full-webfont.woff2') format('woff2'),
+         url('../fonts/highland_park_medium_-_full-webfont.woff') format('woff'),
+         url('../fonts/highland_park_medium_-_full-webfont.ttf') format('truetype'),
+         url('../fonts/highland_park_medium_-_full-webfont.svg#highland_parkmedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'mulilight';
+    src: url('../fonts/muli-light-webfont.eot');
+    src: url('../fonts/muli-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/muli-light-webfont.woff2') format('woff2'),
+         url('../fonts/muli-light-webfont.woff') format('woff'),
+         url('../fonts/muli-light-webfont.ttf') format('truetype'),
+         url('../fonts/muli-light-webfont.svg#mulilight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'Muli-Regular';
+  src: url('../fonts/Muli-Regular.eot');
+  src: url('../fonts/Muli-Regular.woff2') format('woff2'),
+       url('../fonts/Muli-Regular.woff') format('woff'),
+       url('../fonts/Muli-Regular.ttf') format('truetype'),
+       url('../fonts/Muli-Regular.svg#Muli-Regular') format('svg'),
+       url('../fonts/Muli-Regular.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Muli-Bold';
+  src: url('../fonts/Muli-Bold.eot');
+  src: url('../fonts/Muli-Bold.woff2') format('woff2'),
+       url('../fonts/Muli-Bold.woff') format('woff'),
+       url('../fonts/Muli-Bold.ttf') format('truetype'),
+       url('../fonts/Muli-Bold.svg#Muli-Bold') format('svg'),
+       url('../fonts/Muli-Bold.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Muli-SemiBold';
+  src: url('../fonts/Muli-SemiBold.eot');
+  src: url('../fonts/Muli-SemiBold.woff2') format('woff2'),
+       url('../fonts/Muli-SemiBold.woff') format('woff'),
+       url('../fonts/Muli-SemiBold.ttf') format('truetype'),
+       url('../fonts/Muli-SemiBold.svg#Muli-SemiBold') format('svg'),
+       url('../fonts/Muli-SemiBold.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TradeGothicNo.2-Bold';
+  src: url('../fonts/TradeGothicNo.2-Bold.woff') format('woff'),
+       url('../fonts/TradeGothicNo.2-Bold.ttf') format('truetype'),
+       url('../fonts/TradeGothicNo.2-Bold.svg#TradeGothicNo.2-Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Font Awesome
+
+@font-face {
+    font-family: 'fontawesome-webfont';
+    src: url('../fonts/font-awesome/fontawesome-webfont.eot');
+    src: url('../fonts/font-awesome/FontAwesome.otf'),
+         url('../fonts/font-awesome/fontawesome-webfont.woff2') format('woff2'),
+         url('../fonts/font-awesome/fontawesome-webfont.woff') format('woff'),
+         url('../fonts/font-awesome/fontawesome-webfont.ttf') format('truetype'),
+         url('../fonts/font-awesome/fontawesome-webfont.svg') format('svg');
+    font-style: normal;
+}

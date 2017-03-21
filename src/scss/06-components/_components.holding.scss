@@ -4,80 +4,113 @@
 
   &__container {
     left: 50%;
-    padding: inuit-rem(24px);
+    margin: 15% 0;
+    padding: 0 5%;
     position: absolute;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    top: 0;
+    transform: translateX(-50%);
     width: 100%;
     z-index: 50;
-
-    @include mq($until: tablet, $and: '(orientation: landscape)') {
-      top: 0;
-      transform: translateX(-50%);
-    }
-
+    
     @include mq($from: tablet) {
-      width: 75%;
+      margin: 0;
       padding: 0;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: 75%;
     }
 
     @include mq($from: desktop) {
-      width: 50%;
-    }
-    
-    @include mq($from: wide) {
-      width: 33%;
+      //width: 33%;
+      max-width: inuit-rem(650px);
     }
   }
     
   &__logo {
     margin: 0 auto;
-    width: inuit-rem(500px);
+    width: 100%;
+
+    @include mq($from: mobileLandscape) {
+      width: 75%;
+    }
   }
 
   &__title {
+    font-family: $fontHighlandpark;
+    font-size: inuit-rem(40px);
+    letter-spacing: 1px;
+    line-height: $heading-line-height;
+    margin: inuit-rem(80px) auto inuit-rem(40px);
+    text-align: center;
     text-transform: uppercase;
+
+    @include mq($from: tablet) {
+      font-size: inuit-rem(32px);
+      margin: inuit-rem(40px) auto inuit-rem(15px);
+    }
   }
 
   &__links {
-
-    list-style-type: none;
     display: inline;
+    font-family: $fontTradeGothicBold;
+    font-size: inuit-rem(16px);
+    list-style-type: none;
     text-transform: uppercase;
 
     &:first-child::after {
       content: "|";
+      font-size: inuit-rem(14px);
       padding-left: inuit-rem(12px);
     }
   }
 
   &__form {
     background-color: $brand-primary-4;
-    padding: inuit-rem(12px);
-
-    &__wrapper {
-      position: relative;
-    }
+    margin-top: inuit-rem(55px);
+    padding: inuit-rem(30px) 5%;
 
     &__title {
       color: $brand-primary-1;
+      display: block; 
+      font-family: $fontTradeGothicBold;
+      font-size: inuit-rem(18px);
+      letter-spacing: $base-letter-spacing;
+      line-height: $heading-line-height;
+      margin: 0 auto;
       text-align: center;
+      text-transform: uppercase;
+      width: 100%;
+
+      @include mq($from: mobileLandscape) {
+        font-size: inuit-rem(18px);
+      }
     }
 
     &__input {
-      height: inuit-rem(35px);
-      width: 95%;
+      height: inuit-rem(44px);
+      margin-bottom: inuit-rem(16px);
+      width: 100%;
 
-      &--name {
-        display: none;
+      @include mq($from: mobileLandscape, $until: desktop) {
+        width: 49%;
 
-        @include mq($from: desktop) {
-          display:inline-block;
+        &:first-child {
+          margin-right: 1%;
+        }
+
+        &:last-child {
+          margin-left: 1%;
         }
       }
 
       @include mq($from: desktop) {
+        height: inuit-rem(35px);
+        margin-bottom: 0;
         width: 48%;
+
+        &:first-child {
+          margin-right: 1%;
+        }
       }
     }
 
@@ -85,13 +118,18 @@
       background-color: $brand-primary-4;
       border: inuit-rem(1px) solid $brand-primary-1;
       color: $brand-primary-1;
-      height: inuit-rem(35px);
+      height: inuit-rem(44px);
+      letter-spacing: 1px;
       text-transform: uppercase;
       width: 100%;
+
+      @include mq($from: desktop) {
+        height: inuit-rem(35px);
+      }
     }
 
     @include mq($from: tablet) {
-      padding: inuit-rem(24px);
+      padding: inuit-rem(15px);
     }
   }
 
