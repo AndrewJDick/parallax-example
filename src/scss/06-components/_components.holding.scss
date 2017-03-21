@@ -4,7 +4,7 @@
 
   &__container {
     left: 50%;
-    margin: 15% 0;
+    margin: inuit-rem(80px) 0;
     padding: 0 5%;
     position: absolute;
     top: 0;
@@ -57,6 +57,19 @@
     list-style-type: none;
     text-transform: uppercase;
 
+    a {
+      color: $black;
+      border-bottom: 0;
+      padding-bottom: inuit-rem(1px);
+      text-decoration: none;
+
+      &:active,
+      &:focus,
+      &:hover {
+        border-bottom: 1px solid $brand-secondary-3;
+      }
+    }
+
     &:first-child::after {
       content: "|";
       font-size: inuit-rem(14px);
@@ -77,21 +90,25 @@
       letter-spacing: $base-letter-spacing;
       line-height: $heading-line-height;
       margin: 0 auto;
+      padding-left: 0;
       text-align: center;
       text-transform: uppercase;
       width: 100%;
 
       @include mq($from: mobileLandscape) {
         font-size: inuit-rem(18px);
+        width: 80%;
       }
     }
 
     &__input {
-      height: inuit-rem(44px);
+
+      display: inline-block;
       margin-bottom: inuit-rem(16px);
+      padding: 0;
       width: 100%;
 
-      @include mq($from: mobileLandscape, $until: desktop) {
+      @include mq($from: mobileLandscape) {
         width: 49%;
 
         &:first-child {
@@ -100,31 +117,51 @@
 
         &:last-child {
           margin-left: 1%;
+          margin-right: 0;
         }
       }
 
       @include mq($from: desktop) {
-        height: inuit-rem(35px);
         margin-bottom: 0;
-        width: 48%;
 
-        &:first-child {
-          margin-right: 1%;
+        &:last-child {
+          margin-left: 0;
+        }
+      }
+      
+      input {
+        height: inuit-rem(44px);
+        padding-left: inuit-rem(10px); 
+        width: 100%; 
+
+        @include mq($from: desktop) {
+          height: inuit-rem(35px);
         }
       }
     }
 
     &__submit {
-      background-color: $brand-primary-4;
-      border: inuit-rem(1px) solid $brand-primary-1;
-      color: $brand-primary-1;
-      height: inuit-rem(44px);
-      letter-spacing: 1px;
-      text-transform: uppercase;
+
+      padding-left: 0;
       width: 100%;
 
       @include mq($from: desktop) {
-        height: inuit-rem(35px);
+        width: 98%;
+        margin-left: 2%;
+      }
+
+      input {
+        background-color: $brand-primary-4;
+        border: inuit-rem(1px) solid $brand-primary-1;
+        color: $brand-primary-1;
+        height: inuit-rem(44px);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        width: 100%;
+
+        @include mq($from: desktop) {
+          height: inuit-rem(35px);
+        }
       }
     }
 
