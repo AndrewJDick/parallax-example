@@ -1,4 +1,4 @@
 // App
-import storyPeople from './app/StoryPeople';
+import ParallaxGrid from './app/ParallaxGrid';
 
-storyPeople();
+const parallaxGrid = new ParallaxGrid();

@@ -1,0 +1,14 @@
+.u-positioning--upper,
+.u-positioning--lower {
+    position: fixed !important;
+    left: 0 !important;
+    width: 100% !important;
+}
+
+.u-positioning--upper {
+    top: 0 !important;
+}
+
+.u-positioning--lower {
+    top: 50vh !important;
+}
