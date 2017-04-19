@@ -21,22 +21,22 @@ export default class ParallaxGrid {
     this.gridTop = 0;
 
     this.setRowZindex();
+    this.configureGrid();
     this.listeners();
-  }
-
-  resize() {
-    this.rowHeight = window.innerHeight / 2;
-    this.gridTop = this.grid.getBoundingClientRect().top;
-    
-    this.setRow();
-    this.setQuadrant();
-    this.setGrid();
   }
 
   setRowZindex() {
     for(let row = 0; row < this.gridElements.rows.length; row++) {
       this.gridElements.rows[row].style.zIndex = `${(row % 2 === 0) ? row * 5 : (row * 5) + 10}`;
     }
+  }
+
+  configureGrid() {
+    this.rowHeight = window.innerHeight / 2;
+    
+    this.setRow();
+    this.setQuadrant();
+    this.setGrid();
   }
 
   setRow() {
@@ -67,17 +67,18 @@ export default class ParallaxGrid {
   }
 
   requestTick() {
-    if(this.scrollTick) {
-            window.requestAnimationFrame(() => this.evaluate());
-        }
-
-        this.scrollTick = true;
+    if(!this.scrollTick) {
+      window.requestAnimationFrame(() => this.evaluate());
     }
 
-  evaluate() {
-    this.resize();
+    this.scrollTick = true;
+  }
 
-    if (this.gridTop >= 0 || this.lastQuadrant.getBoundingClientRect().top <= 0) {
+  evaluate() {
+    const gridTop = this.gridTop = this.grid.getBoundingClientRect().top;
+    const quadTop = this.lastQuadrant.getBoundingClientRect().top
+
+    if (gridTop >= 0 || quadTop <= 0) {
       this.clearClasses();
     } else {
       this.update();
@@ -141,6 +142,6 @@ export default class ParallaxGrid {
     window.addEventListener('scroll', () => this.requestTick(), false);
     window.addEventListener('orientationchange', () => this.pageReload(), false);
     window.addEventListener('beforeunload', () => this.scrollToTop(), false);
-    window.addEventListener('resize', () => this.resize(), false);
+    window.addEventListener('resize', () => this.configureGrid(), false);
   }
 }
