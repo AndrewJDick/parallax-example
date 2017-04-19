@@ -1,7 +1,13 @@
 .c-grid {
 
+  display: none;
   margin-bottom: inuit-rem(30px);
   margin-top: inuit-rem(30px);
+
+  @include mq($from: desktop) {
+    display: block;
+    overflow: hidden;
+  }
 
   &__header {
     margin: inuit-rem(30px) 0;
@@ -13,21 +19,7 @@
   }
 
   &__quadrant {
-    height: 200vh;
     position: relative;
-
-    @include mq($from: desktop) {
-      height: 100vh;
-    }
-  }
-
-  &__row {
-    height: 100vh;
-    position: relative;
-
-    @include mq($from: desktop) {
-      height: 50vh;
-    }
   }
 
   &__panel {
